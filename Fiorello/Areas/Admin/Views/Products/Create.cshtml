@@ -1,0 +1,50 @@
+﻿@model Product
+
+<div class="col-12">
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Product Create</h5>
+
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label" asp-for="Photo"></label>
+                    <input asp-for="Photo" class="form-control">
+                    <span class="text-danger" asp-validation-for="Photo"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="Name"></label>
+                    <input accept="image/*" asp-for="Name" class="form-control">
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" asp-for="Price"></label>
+                    <input accept="image/*" asp-for="Price" class="form-control">
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Select category</label>
+                    <select class="form-control" name="catId">
+                        @foreach (Category cat in ViewBag.Categories)
+                        {
+                            <option value="@cat.Id">@cat.Name</option>
+                        }
+                        
+                    </select>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Send</button>
+                <a asp-action="Index" class="btn btn-secondary text-white">Go back</a>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+                }

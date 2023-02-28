@@ -1,0 +1,78 @@
+﻿@model List<Product>
+<div class="row">
+    <div class="coll-12">
+        <div class="card">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-header">Products</h5>
+                <a asp-action="Create" class="btn rounded-pill btn-primary text-white" style="margin-right:20px">Create</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive text-nowrap">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                                <th>Category</th>
+                                @*<th>Subtitle</th>*@
+                                
+
+                                <th>Status</th>
+                                <th style="text-align:right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Product item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/img/@item.Image" style="width:80px; height:80px;object-fit:cover" />
+                                    </td>
+                                    <td>
+                                        @item.Name
+                                    </td>
+                                    <td>
+                                        @item.Price
+                                    </td>
+                                    <td>
+                                        @item.Category.Name
+                                    </td>
+                                    @*<td>@item.SubTitle</td>*@
+                                    <td>
+                                        @if (item.IsDeactive)
+                                        {
+                                            <span class="text-danger">Passive</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-success">Active</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-end">
+                                            @*<a asp-action="Detail" asp-route-id="@item.Id" class="btn rounded-pill btn-warning text-white" style="margin-right:5px">Detail</a>*@
+                                            <a asp-action="Update" asp-route-id="@item.Id" class="btn rounded-pill btn-info text-white" style="margin-right:5px">Update</a>
+                                            @if (item.IsDeactive)
+                                            {
+                                                <a asp-action="Activity" asp-route-id="@item.Id" class="btn rounded-pill btn-success text-white" style="margin-right:5px;width:120px">Activate</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-action="Activity" asp-route-id="@item.Id" class="btn rounded-pill btn-danger text-white" style="margin-right:5px;width:120px">Deactivate</a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
